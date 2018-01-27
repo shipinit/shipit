@@ -1,2 +1,0 @@
-# shipit
-Decentralized Shipping Economy
