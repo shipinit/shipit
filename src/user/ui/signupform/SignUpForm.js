@@ -32,6 +32,9 @@ class SignUpForm extends Component {
           <input id="name" type="text" value={this.state.name} onChange={this.onInputChange.bind(this)} placeholder="Name" />
           <span className="pure-form-message">This is a required field.</span>
 
+          <label htmlFor="phone-number">Phone Number</label>
+          <input id="phone-number" type="text" placeholder="(123) 456-7890" />
+
           <br />
 
           <button type="submit" className="pure-button pure-button-primary">Sign Up</button>
