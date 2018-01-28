@@ -38,7 +38,7 @@ ReactDOM.render((
           <Route path="dashboard" component={UserIsAuthenticated(Dashboard)} />
           <Route path="signup" component={UserIsNotAuthenticated(SignUp)} />
           <Route path="profile" component={UserIsAuthenticated(Profile)} />
-          <Route path="smartcontract" component={UserIsAuthenticated(SmartContract)} />
+          <Route path="smartcontract" component={UserIsNotAuthenticated(SmartContract)} />
         </Route>
       </Router>
     </Provider>

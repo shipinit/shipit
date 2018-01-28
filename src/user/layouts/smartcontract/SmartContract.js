@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 
 class SmartContract extends Component {
   render() {
+    alert("ffffff");
+
     return(
       <main className="container">
         <div className="pure-g">
@@ -16,3 +18,5 @@ class SmartContract extends Component {
     )
   }
 }
+
+export default SmartContract;
