@@ -21,7 +21,7 @@ contract Shipping is Killable {
   function createShipment(address sender, string pickupAddress, string deliveryAddress) public payable {
     // Receiver creates shipment
     shipments.push(Shipment(sender,msg.sender,0x0,msg.value,"",pickupAddress,deliveryAddress,false,false));
-    shipmentCount++;
+    shipmentCount = shipmentCount + 1;
   }
 
   function cancelShipment(uint shipmentNumber) {
@@ -33,12 +33,12 @@ contract Shipping is Killable {
     delete shipments[shipmentNumber];
   }
 
-  function getShipment(uint shipmentNumber) returns (address _sender, address _receiver, address _transporter) {
+  function getShipment(uint shipmentNumber) public view returns (address _sender, address _receiver, address _transporter) {
     Shipment shipment = shipments[shipmentNumber];
     return (shipment.sender, shipment.receiver, shipment.transporter);
   }
 
-  function getShipmentCount() returns (uint) {
+  function getShipmentCount() public view returns (uint) {
     return shipmentCount;
   }
 

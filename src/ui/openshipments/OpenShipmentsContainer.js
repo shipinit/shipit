@@ -3,12 +3,15 @@ import OpenShipments from './OpenShipments'
 import { getShipments } from './OpenShipmentsActions'
 
 const mapStateToProps = (state, ownProps) => {
-  return {}
+  return {
+
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    shipments: dispatch(getShipments())
+    shipments: dispatch(getShipments()),
+    test: "test"
   }
 }
 

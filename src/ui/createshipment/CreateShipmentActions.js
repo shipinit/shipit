@@ -1,10 +1,11 @@
 import ShippingContract from '../../../build/contracts/Shipping.json'
 // import { loginUser } from '../loginbutton/LoginButtonActions'
+import { browserHistory } from 'react-router'
 import store from '../../store'
 
 const contract = require('truffle-contract')
 
-export function getShipments() {
+export function createShipment(sender_address, pickup_address, delivery_address) {
   let web3 = store.getState().web3.web3Instance
 
   // Double-check web3's status.
@@ -28,21 +29,12 @@ export function getShipments() {
         shipping.deployed().then(function(instance) {
           shippingInstance = instance
 
-          shippingInstance.createShipment("0xd10f8ac8c92d4c8596ad6f42410f0fbff312cb7b", "waterloo", "toronto", {from: coinbase})
-          .then(function(result) {
-            console.log('createshipping')
-            console.log(result);
-            shippingInstance.getShipment.call(0)
-            .then(function(result2) {
-              // If no error, login user.
-              console.log('getshipmentcount')
-              console.log(result2)
-              debugger
-              return result2;
-              // return dispatch(loginUser())
-            })
-          })
           // Attempt to sign up user.
+          shippingInstance.createShipment(sender_address, pickup_address, delivery_address, {from: coinbase})
+          .then(function(result) {
+            // If no error, login user.
+            return browserHistory.push('/dashboard')
+          })
           .catch(function(result) {
             // If error...
           })
