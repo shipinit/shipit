@@ -24,7 +24,7 @@ class OfferShipment extends Component {
       <form className="pure-form pure-form-stacked" onSubmit={this.handleSubmit.bind(this)}>
         <fieldset>
           <label htmlFor="name">License Plate</label>
-          <input id="license_plate" type="text" value={this.state.license_plate} onChange={this.onLicensePlateChange.bind(this)} placeholder="License Plate" />
+          <input id="license_plate" type="text" value={this.state.license_plate} style={{color: 'black'}} onChange={this.onLicensePlateChange.bind(this)} placeholder="License Plate" />
           <br />
 
           <button type="submit" className="pure-button pure-button-primary">Offer Shipment</button>

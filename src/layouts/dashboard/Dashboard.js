@@ -8,7 +8,7 @@ import { Button, Collapse, Card, CardBody, Container,
   InputGroupText, Input, Table } from 'reactstrap'
 
   import OfferShipmentContainer from '../../ui/offershipment/OfferShipmentContainer.js'
-  import PickedupShipment from '../../ui/pickedupshipment/PickedupShipment.js'
+  import PickedupShipment from '../../ui/pickedupshipment/PickedupShipmentContainer.js'
   import ReceiveShipmentContainer from '../../ui/receiveshipment/ReceiveShipmentContainer.js'
 
 const contract = require('truffle-contract')
@@ -84,7 +84,7 @@ class Dashboard extends Component {
     var s = this.state.shipments[i];
     if (s[2] == "0x0000000000000000000000000000000000000000" && !s[7]) { // CONTRACT FREE, but no transporter
       return 0;
-    } else if (s[2] != "0x0000000000000000000000000000000000000000" && !s[7]) { // CONTRACT FREE AND TRANSPORTER OFFER
+    } else if (s[2] != "0x0000000000000000000000000000000000000000" && !s[7] && !s[8]) { // CONTRACT FREE AND TRANSPORTER OFFER
       return 1;
     } else if (s[7] && !s[8]) { // delivery IN PROGRESS
       return 2;
