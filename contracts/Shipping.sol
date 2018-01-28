@@ -81,8 +81,9 @@ contract Shipping is Killable {
 
   function pickedUpShipment(uint shipmentNumber, string _licensePlate) {
     // Sender confirms that transporter picked up package
-    require(msg.sender == shipments[shipmentNumber].sender);
+    // require(msg.sender == shipments[shipmentNumber].sender);
     shipments[shipmentNumber].licensePlate = _licensePlate;
+    shipments[shipmentNumber].enRoute = true;
   }
 
   function receiveShipment(uint shipmentNumber) {
