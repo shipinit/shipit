@@ -145,7 +145,7 @@ class Dashboard extends Component {
   }
 
   render() {
-
+    console.log("REDNER")
     return(
       <div>
         <br/><br/><br/><br/>
@@ -185,9 +185,8 @@ class Dashboard extends Component {
     				</CardBody></Card>
         		</div>
         		)
-        })}
+          })}
           <CreateShipmentContainer/>
-          {this.state.var}
         </Container>
       </div>
     )
