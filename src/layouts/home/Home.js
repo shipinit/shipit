@@ -12,10 +12,9 @@ class Home extends Component {
               <h1 className="display-3">Welcome to <b>ShipIt!</b></h1>
               <p className="lead">The decentralized P2P shipping network of the future.</p>
               <hr className="my-2" />
-              <p>Find out how you can help revolutionize parcel deliveries as a:</p>
+              <p>Find out how you can help revolutionize parcel deliveries today!</p>
               <p className="lead">
-                <Button color="primary">Shipper</Button>{' '}
-                <Button color="secondary">Sender / Receiver</Button>
+                <Button color="primary">Sign Up</Button>
               </p>
             </Jumbotron>
 
