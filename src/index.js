@@ -13,7 +13,6 @@ import Home from './layouts/home/Home'
 import Dashboard from './layouts/dashboard/Dashboard'
 import SignUp from './user/layouts/signup/SignUp'
 import Profile from './user/layouts/profile/Profile'
-import SmartContract from './user/layouts/smartcontract/SmartContract'
 
 // Redux Store
 import store from './store'
@@ -35,10 +34,9 @@ ReactDOM.render((
       <Router history={history}>
         <Route path="/" component={App}>
           <IndexRoute component={Home} />
-          <Route path="dashboard" component={UserIsAuthenticated(Dashboard)} />
+          <Route path="dashboard" component={UserIsNotAuthenticated(Dashboard)} /> {/* TODO: change to require authentication! */}
           <Route path="signup" component={UserIsNotAuthenticated(SignUp)} />
           <Route path="profile" component={UserIsAuthenticated(Profile)} />
-          <Route path="smartcontract" component={UserIsNotAuthenticated(SmartContract)} />
         </Route>
       </Router>
     </Provider>
