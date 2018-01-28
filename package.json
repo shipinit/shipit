@@ -48,11 +48,13 @@
     "whatwg-fetch": "1.0.0"
   },
   "dependencies": {
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
+    "bootstrap": "^4.0.0",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
     "react-redux": "^5.0.2",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.7",
+    "reactstrap": "^5.0.0-alpha.4",
     "redux": "^3.6.0",
     "redux-auth-wrapper": "^1.0.0",
     "redux-thunk": "^2.2.0"
