@@ -5,7 +5,7 @@ import store from '../../store'
 
 const contract = require('truffle-contract')
 
-export function createShipment(sender_address, pickup_address, delivery_address) {
+export function createShipment(sender_address, pickup_address, delivery_address, shipping_cost) {
   let web3 = store.getState().web3.web3Instance
 
   // Double-check web3's status.
@@ -29,8 +29,13 @@ export function createShipment(sender_address, pickup_address, delivery_address)
         shipping.deployed().then(function(instance) {
           shippingInstance = instance
 
+          console.log('shipping cost');
+          console.log(shipping_cost);
+          console.log(shipping_cost * 10^18);
+          console.log(parseInt(shipping_cost * Math.pow(10,18)))
+
           // Attempt to sign up user.
-          shippingInstance.createShipment(sender_address, pickup_address, delivery_address, {from: coinbase})
+          shippingInstance.createShipment(sender_address, pickup_address, delivery_address, {value: parseInt(shipping_cost * Math.pow(10,18)),from: coinbase})
           .then(function(result) {
             // If no error, login user.
             return browserHistory.push('/dashboard')
