@@ -8,7 +8,7 @@ import { Button, Collapse, Card, CardBody, Container,
   InputGroupText, Input, Table } from 'reactstrap'
 
   import OfferShipmentContainer from '../../ui/offershipment/OfferShipmentContainer.js'
-  import PickedupShipment from '../../ui/offershipment/PickedupShipment.js'
+  import PickedupShipment from '../../ui/pickedupshipment/PickedupShipment.js'
   import ReceiveShipmentContainer from '../../ui/receiveshipment/ReceiveShipmentContainer.js'
 
 const contract = require('truffle-contract')
@@ -129,7 +129,6 @@ class Dashboard extends Component {
       content = (<div><OfferShipmentContainer shipping_number={i} /></div>);
     } else if (sState === 1) {
       content = (<div><PickedupShipment shipping_number={i} /></div>);
-        )
     } else if (sState === 2) { // Show more info, the shipping is in progress
       content = (<div><ReceiveShipmentContainer shipping_number={i}/></div>);
     }
@@ -183,35 +182,6 @@ class Dashboard extends Component {
             })
           }
         })
-
-        for (let i = 0; i < 2; i++) {
-          shippingInstance.getShipment.call(i)
-          .then(function(result) {
-            // If no error, login user.
-            console.log('getshipmentcount')
-            console.log(result)
-            var tempArr = _this.state.shipments;
-            let tempShipments = tempArr.concat([result]);
-            _this.setState({shipments: tempShipments});
-            var arr = [];
-            console.log(tempShipments.length);
-            for (var j = 0; j < tempShipments.length; j++) {
-              arr.push({
-                licensePlate: ""
-              });
-            }
-            _this.setState({ transporterData: arr });
-            // console.log(tempShipments);
-            // console.log('test2');
-            // debugger
-            // return result;
-            // return dispatch(loginUser())
-          })
-          // Attempt to sign up user.
-          .catch(function(result) {
-            // If error...
-          })
-        }
       })
     })
   }

@@ -35,4 +35,4 @@ class PickedupShipment extends Component {
   }
 }
 
-export default OfferShipment
+export default PickedupShipment
