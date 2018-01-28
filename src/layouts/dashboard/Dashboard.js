@@ -22,7 +22,7 @@ class Dashboard extends Component {
     				pickupAddress: "382 Whitney Ave.",
     				deliveryAddress: "56 Victoria St.",
     				enRoute: false,
-    				isShipped: false
+    				isShipped: true
     			},
     			{
     				shippingCost: 14,
@@ -39,7 +39,7 @@ class Dashboard extends Component {
     				licensePlate: "",
     				pickupAddress: "45 Richmond St. W.",
     				deliveryAddress: "12 Banff Ave.",
-    				enRoute: false,
+    				enRoute: true,
     				isShipped: false
     			}
     		]
@@ -47,6 +47,7 @@ class Dashboard extends Component {
     };
     this.toggle = this.toggle.bind(this);
     this.getShipmentColour = this.getShipmentColour.bind(this);
+    this.getExpandButton = this.getExpandButton.bind(this);
   }
 
   componentDidMount() {
@@ -65,12 +66,25 @@ class Dashboard extends Component {
   }
 
   getShipmentColour(i) {
-  	if (this.state.stub.shippingList[i].isShipped) {
-  		return "primary";
-  	} else if (this.state.stub.shippingList[i].enRoute) {
-  		return "warn";
+  	var colour = "";
+  	if (this.state.stub.shippingList[i].isShipped) { // These are done
+  		colour =  "#757575";
+  	} else if (this.state.stub.shippingList[i].enRoute) { // These are in progress
+  		colour =  "#F4511E";
+  	} else { // Can signup with these
+  		colour = "#43A047";
   	}
-  	return "success";
+  	return {background: colour};
+  	
+  }
+
+  getExpandButton(i) {
+  	if (!this.state.stub.shippingList[i].enRoute && !this.state.stub.shippingList[i].isShipped) {
+  		return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "signup" : "less"}</Button>);
+  	} else if (this.state.stub.shippingList[i].enRoute) {
+  		return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "info" : "less"}</Button>);
+  	}
+  	return (<div></div>);
   }
 
   render() {
@@ -95,13 +109,14 @@ class Dashboard extends Component {
         {this.state.stub.shippingList.map((el, i) => {
         	return (
         		<div key={i}>
-    				<Card body inverse color={this.getShipmentColour(i)}><CardBody>
+    				<Card body inverse style={this.getShipmentColour(i)}><CardBody>
 						<Row>
 							<Col xs="1" className="text-center"><strong>${el.shippingCost}</strong></Col>
 							<Col xs="4" className="text-center">{el.pickupAddress}</Col>
 							<Col xs="4" className="text-center">{el.deliveryAddress}</Col>
 							<Col xs="1" className="text-center"></Col>
-							<Col xs="1"><Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "expand" : "less"}</Button></Col>
+
+							<Col xs="1">{this.getExpandButton(i)}</Col>
 						</Row>
 						<Collapse isOpen={!this.state.collapsed[i]}>
 						<br/>
