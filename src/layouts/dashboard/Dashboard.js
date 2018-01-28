@@ -8,6 +8,7 @@ import { Button, Collapse, Card, CardBody, Container,
   InputGroupText, Input, Table } from 'reactstrap'
 
   import OfferShipmentContainer from '../../ui/offershipment/OfferShipmentContainer.js'
+  import PickedupShipment from '../../ui/offershipment/PickedupShipment.js'
   import ReceiveShipmentContainer from '../../ui/receiveshipment/ReceiveShipmentContainer.js'
 
 const contract = require('truffle-contract')
@@ -50,8 +51,7 @@ class Dashboard extends Component {
         ]
       },
       var: '',
-      shipments: [
-        ["0x0", "", "0x000000000ss0000000000000000000000000000000", 123, "123dsa", "ad1", "ad2", true, false]],
+      shipments: [],
       transporterData: []
     };
 
@@ -114,6 +114,8 @@ class Dashboard extends Component {
     var sState = this.getShipmentState(i);
     if (sState === 0) {
       return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "signup" : "less"}</Button>);
+    } else if (sState === 1) {
+      return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "pickup" : "less"}</Button>);
     } else if (sState === 2) {
       return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "arrived" : "less"}</Button>);
     }
@@ -125,6 +127,9 @@ class Dashboard extends Component {
     var sState = this.getShipmentState(i);
     if (sState === 0) { // New Transporter can signup
       content = (<div><OfferShipmentContainer shipping_number={i} /></div>);
+    } else if (sState === 1) {
+      content = (<div><PickedupShipment shipping_number={i} /></div>);
+        )
     } else if (sState === 2) { // Show more info, the shipping is in progress
       content = (<div><ReceiveShipmentContainer shipping_number={i}/></div>);
     }

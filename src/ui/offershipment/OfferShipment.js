@@ -25,7 +25,6 @@ class OfferShipment extends Component {
         <fieldset>
           <label htmlFor="name">License Plate</label>
           <input id="license_plate" type="text" value={this.state.license_plate} onChange={this.onLicensePlateChange.bind(this)} placeholder="License Plate" />
-
           <br />
 
           <button type="submit" className="pure-button pure-button-primary">Offer Shipment</button>
