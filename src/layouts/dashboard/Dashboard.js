@@ -46,7 +46,8 @@ class Dashboard extends Component {
           }
         ]
       },
-      var: ''
+      var: '',
+      shipments: []
     };
 
     this.toggle = this.toggle.bind(this);
@@ -146,26 +147,34 @@ class Dashboard extends Component {
       shipping.deployed().then(function(instance) {
         shippingInstance = instance
 
+        let shipmentCount = 0;
+
         shippingInstance.getShipmentCount.call()
         .then(function(result) {
           console.log('get shipment count')
           console.log(result)
         })
-        
-        shippingInstance.getShipment.call(0)
-        .then(function(result) {
-          // If no error, login user.
-          console.log('getshipmentcount')
-          console.log(result)
-          _this.setState({var: result})
-          // debugger
-          // return result;
-          // return dispatch(loginUser())
-        })
-        // Attempt to sign up user.
-        .catch(function(result) {
-          // If error...
-        })
+
+        for (let i = 0; i < 2; i++) {
+          shippingInstance.getShipment.call(i)
+          .then(function(result) {
+            // If no error, login user.
+            console.log('getshipmentcount')
+            console.log(result)
+            var tempArr = _this.state.shipments;
+            let tempShipments = tempArr.concat([result]);
+            debugger
+            _this.setState({shipments: tempShipments})
+            console.log('test2');
+            // debugger
+            // return result;
+            // return dispatch(loginUser())
+          })
+          // Attempt to sign up user.
+          .catch(function(result) {
+            // If error...
+          })
+        }
       })
     })
   }
@@ -200,6 +209,9 @@ class Dashboard extends Component {
             )
           })}
           <CreateShipmentContainer/>
+          {this.state.shipments.map((shipment) => {
+            return (<div>{shipment[0]}</div>);
+          })}
         </Container>
       </div>
     )
