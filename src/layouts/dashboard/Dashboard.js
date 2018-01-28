@@ -163,8 +163,8 @@ class Dashboard extends Component {
             console.log(result)
             var tempArr = _this.state.shipments;
             let tempShipments = tempArr.concat([result]);
-            debugger
-            _this.setState({shipments: tempShipments})
+            _this.setState({shipments: tempShipments});
+            console.log(tempShipments);
             console.log('test2');
             // debugger
             // return result;
@@ -208,6 +208,25 @@ class Dashboard extends Component {
             </div>
             )
           })}
+        {this.state.shipments.map((el, i) => {
+          return (
+            <div key={i}>
+              <Card body inverse style={this.getShipmentColour(i)}><CardBody>
+              <Row>
+                <Col xs="1" className="text-center"><strong>${/*TODO: el.shippingCost*/33}</strong></Col>
+                <Col xs="4" className="text-center">{el.pickupAddress}</Col>
+                <Col xs="4" className="text-center">{el.deliveryAddress}</Col>
+                <Col xs="1" className="text-center"></Col>
+
+                <Col xs="1">{this.getExpandButton(i)}</Col>
+              </Row>
+              <Collapse isOpen={!this.state.collapsed[i]}>
+              {this.getExpandedContent(i)}
+              </Collapse>
+              </CardBody></Card>
+            </div>
+            )
+        })}
           <CreateShipmentContainer/>
           {this.state.shipments.map((shipment) => {
             return (<div>{shipment[0]}</div>);
