@@ -63,8 +63,9 @@ contract Shipping is Killable {
     return shipments.length;
   }
 
-  function offerShipment(uint shipmentNumber) {
+  function offerShipment(uint shipmentNumber, string _licensePlate) {
     shipments[shipmentNumber].transporter = msg.sender;
+    shipments[shipmentNumber].licensePlate = _licensePlate;
   }
 
   function cancelOffer(uint shipmentNumber) {
