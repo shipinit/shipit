@@ -1,19 +1,23 @@
 pragma solidity ^0.4.11;
 
-contract Shipping {
+import './zeppelin/lifecycle/Killable.sol';
+
+contract Shipping is Killable {
   struct Shipment {
     address sender;
     address receiver;
     address transporter;
-    bool enRoute;
     uint shippingCost;
+    string licensePlate;
+    bool enRoute;
+    bool shipped;
   }
 
   Shipment[] public shipments;
 
   function createShipment(address sender) public payable {
     // Receiver creates shipment
-    shipments.push(Shipment(sender,msg.sender,0x0,false,msg.value));
+    shipments.push(Shipment(sender,msg.sender,0x0,msg.value,"",false,false));
   }
 
   function cancelShipment(uint shipmentNumber) {
@@ -35,21 +39,27 @@ contract Shipping {
   }
 
   function cancelOffer(uint shipmentNumber) {
-    if (shipments[shipmentNumber].enRoute == true) throw;
+    require(shipments[shipmentNumber].enRoute == false);
     shipments[shipmentNumber].transporter = 0x0;
   }
 
   function cancelTransportation(uint shipmentNumber) {
-    if (shipments[shipmentNumber].enRoute == false) throw;
+    require(shipments[shipmentNumber].enRoute == true);
+    shipments[shipmentNumber].transporter = 0x0;
+    shipments[shipmentNumber].enRoute = false;
   }
 
-  function withdrawalFunds(uint shipmentNumber) {
-
-  }
-
-  function pickedUpShipment(uint shipmentNumber) {
+  function pickedUpShipment(uint shipmentNumber, string _licensePlate) {
     // Sender confirms that transporter picked up package
-    if (msg.sender != shipments[shipmentNumber].sender) throw;
+    require(msg.sender == shipments[shipmentNumber].sender);
+    shipments[shipmentNumber].licensePlate = _licensePlate;
+  }
 
+  function receiveShipment(uint shipmentNumber) {
+    Shipment shipment = shipments[shipmentNumber];
+    require(msg.sender == shipment.receiver && shipment.enRoute == true);
+    shipment.transporter.transfer(shipment.shippingCost);
+    shipments[shipmentNumber].shipped = true;
+    shipments[shipmentNumber].enRoute = false;
   }
 }
