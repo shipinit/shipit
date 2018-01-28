@@ -8,8 +8,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onCreateShipmentFormSubmit: (sender_address, pickup_address, delivery_address) => {
-      dispatch(createShipment(sender_address, pickup_address, delivery_address))
+    onCreateShipmentFormSubmit: (sender_address, pickup_address, delivery_address, shipping_cost) => {
+      dispatch(createShipment(sender_address, pickup_address, delivery_address, shipping_cost))
     }
   }
 }
