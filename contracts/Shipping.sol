@@ -16,10 +16,12 @@ contract Shipping is Killable {
   }
 
   Shipment[] public shipments;
+  uint public shipmentCount;
 
   function createShipment(address sender, string pickupAddress, string deliveryAddress) public payable {
     // Receiver creates shipment
     shipments.push(Shipment(sender,msg.sender,0x0,msg.value,"",pickupAddress,deliveryAddress,false,false));
+    shipmentCount++;
   }
 
   function cancelShipment(uint shipmentNumber) {
@@ -34,6 +36,10 @@ contract Shipping is Killable {
   function getShipment(uint shipmentNumber) returns (address _sender, address _receiver, address _transporter) {
     Shipment shipment = shipments[shipmentNumber];
     return (shipment.sender, shipment.receiver, shipment.transporter);
+  }
+
+  function getShipmentCount() returns (uint) {
+    return shipmentCount;
   }
 
   function offerShipment(uint shipmentNumber) {
@@ -63,36 +69,5 @@ contract Shipping is Killable {
     shipment.transporter.transfer(shipment.shippingCost);
     shipments[shipmentNumber].shipped = true;
     shipments[shipmentNumber].enRoute = false;
-  }
-
-  // Shipments that are available to be accepted by Shippers
-  function getOpenShipments() returns (Shipment[])  {
-    Shipment[] openShipments;
-    for (uint i = 0; i < shipments.length; ++i) {
-      if ((!shipments[i].enRoute) && (!shipments[i].shipped)) {
-        openShipments.push(shipments[i]);
-      }
-    }
-    return openShipments;
-  }
-
-  function getEnrouteShipments() returns (Shipment[]) {
-    Shipment[] enrouteShipments;
-    for (uint i = 0; i < shipments.length; ++i) {
-      if ((shipments[i].enRoute) && (!shipments[i].shipped)) {
-        enrouteShipments.push(shipments[i]);
-      }
-    }
-    return enrouteShipments;
-  }
-
-  function getFinishedShipments() returns (Shipment[]) {
-    Shipment[] finishedShipments;
-    for (uint i = 0; i < shipments.length; ++i) {
-      if ((!shipments[i].enRoute) && (shipments[i].shipped)) {
-        finishedShipments.push(shipments[i]);
-      }
-    }
-    return finishedShipments;
   }
 }

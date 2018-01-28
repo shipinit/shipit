@@ -29,7 +29,7 @@ export function getOpenShipments() {
           shippingInstance = instance
 
           // Attempt to sign up user.
-          shippingInstance.getOpenShipments({from: coinbase})
+          shippingInstance.getShipment({from: coinbase})
           .then(function(result) {
             // If no error, login user.
             return result;
