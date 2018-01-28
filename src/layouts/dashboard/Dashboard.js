@@ -82,7 +82,7 @@ class Dashboard extends Component {
   	if (!this.state.stub.shippingList[i].enRoute && !this.state.stub.shippingList[i].isShipped) {
   		return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "signup" : "less"}</Button>);
   	} else if (this.state.stub.shippingList[i].enRoute) {
-  		return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "info" : "less"}</Button>);
+  		return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "more info" : "less"}</Button>);
   	}
   	return (<div></div>);
   }
