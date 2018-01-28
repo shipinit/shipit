@@ -7,7 +7,8 @@ class CreateShipment extends Component {
     this.state = {
       sender_address: '',
       pickup_address: '',
-      delivery_address: ''
+      delivery_address: '',
+      shipping_cost: 0.0
     }
   }
 
@@ -23,6 +24,10 @@ class CreateShipment extends Component {
     this.setState({ delivery_address: event.target.value })
   }
 
+  onShippingCostChange(event) {
+    this.setState({ shipping_cost: event.target.value })
+  }
+
   handleSubmit(event) {
     event.preventDefault()
 
@@ -31,7 +36,7 @@ class CreateShipment extends Component {
       return alert('Please fill in your name.')
     }
 
-    this.props.onCreateShipmentFormSubmit(this.state.sender_address, this.state.pickup_address, this.state.delivery_address)
+    this.props.onCreateShipmentFormSubmit(this.state.sender_address, this.state.pickup_address, this.state.delivery_address, this.state.shipping_cost)
   }
 
   render() {
@@ -46,6 +51,9 @@ class CreateShipment extends Component {
 
           <label htmlFor="name">Delivery Address</label>
           <input id="delivery_address" type="text" value={this.state.delivery_address} onChange={this.onDeliveryAddressChange.bind(this)} placeholder="Delivery Address" />
+
+          <label htmlFor="name">Shipping Cost (ETH)</label>
+          <input id="shipping_cost" type="text" value={this.state.shipping_cost} onChange={this.onShippingCostChange.bind(this)} placeholder="Shipping Cost" />
 
           <br />
 

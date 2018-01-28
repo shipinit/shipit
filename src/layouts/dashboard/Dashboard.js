@@ -167,12 +167,31 @@ class Dashboard extends Component {
       shipping.deployed().then(function(instance) {
         shippingInstance = instance
 
-        let shipmentCount = 0;
-
         shippingInstance.getShipmentCount.call()
         .then(function(result) {
           console.log('get shipment count')
           console.log(result)
+          let shippingCount = result["c"][0];
+
+          for (let i = 0; i < shippingCount; i++) {
+            shippingInstance.getShipment.call(i)
+            .then(function(result) {
+              // If no error, login user.
+              console.log('getshipmentcount')
+              console.log(result)
+              var tempArr = _this.state.shipments;
+              let tempShipments = tempArr.concat([result]);
+              _this.setState({shipments: tempShipments})
+              console.log('test2');
+              // debugger
+              // return result;
+              // return dispatch(loginUser())
+            })
+            // Attempt to sign up user.
+            .catch(function(result) {
+              // If error...
+            })
+          }
         })
 
         for (let i = 0; i < 2; i++) {
