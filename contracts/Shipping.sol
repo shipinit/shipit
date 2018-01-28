@@ -19,7 +19,7 @@ contract Shipping is Killable {
 
   function createShipment(address sender, string pickupAddress, string deliveryAddress) public payable {
     // Receiver creates shipment
-    shipments.push(Shipment(sender,msg.sender,0x0,msg.value,"","","",false,false));
+    shipments.push(Shipment(sender,msg.sender,0x0,msg.value,"",pickupAddress,deliveryAddress,false,false));
   }
 
   function cancelShipment(uint shipmentNumber) {
