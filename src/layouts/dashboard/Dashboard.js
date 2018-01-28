@@ -48,7 +48,7 @@ class Dashboard extends Component {
       },
       var: '',
       shipments: [
-        ["0x0", "", "0x000000000s0000000000000000000000000000000", 123, "123dsa", "ad1", "ad2", false, false]],
+        ["0x0", "", "0x000000000ss0000000000000000000000000000000", 123, "123dsa", "ad1", "ad2", true, true]],
       transporterData: []
     };
 
@@ -57,6 +57,9 @@ class Dashboard extends Component {
     this.getExpandButton = this.getExpandButton.bind(this);
     this.getShipments = this.getShipments.bind(this);
     this.getShipmentState = this.getShipmentState.bind(this);
+
+
+
   }
 
   componentDidMount() {
@@ -98,52 +101,31 @@ class Dashboard extends Component {
     } else if (sState === 2) { // delivery IN PROGRESS
       colour =  "#F4511E"; // ORANGE
     } else if (sState === 3) { // These are DONE
-      colour =  "#ffffff"; // WHITE
+      colour =  "blue"; // blue
     }
     return {background: colour};
     
   }
 
   getExpandButton(i) {
-    if (!this.state.stub.shippingList[i].enRoute && !this.state.stub.shippingList[i].isShipped) {
+    var sState = this.getShipmentState(i);
+    if (sState === 0) {
       return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "signup" : "less"}</Button>);
-    } else if (this.state.stub.shippingList[i].enRoute) {
-      return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "more info" : "less"}</Button>);
+    } else if (sState === 2) {
+      return (<Button onClick={(evt) => this.toggle(i)}>{this.state.collapsed[i] ? "arrived" : "less"}</Button>);
     }
     return (<div></div>);
   }
 
   getExpandedContent(i) {
     var content = (<div></div>);
-    if (!this.state.stub.shippingList[i].enRoute && !this.state.stub.shippingList[i].isShipped) { // New Transporter can signup
-      content = (
-            <Row>
-            <Col xs="3">
-            <InputGroup>
-              <Input placeholder="shipping cost" type="text" />
-            </InputGroup>
-            </Col>
-            <Col xs="3">
-            <InputGroup>
-              <Input placeholder="license plate" type="text" />
-            </InputGroup>
-            </Col>
-            <Col><Button onClick={(evt) => console.log("TODO")}>confirm</Button></Col>
-            </Row>);
-    } else if (!this.state.stub.shippingList[i].isShipped) { // Show more info, the shipping is in progress
-      content = (
-            <Row>
-            <Col xs="3">
-            Info goes here
-            </Col>
-            <Col xs="3">
-            Other info goes here
-            </Col>
-            <Col>SIGN OFF on Package received by Receiver GOES HERE </Col>
-            </Row>);
+    var sState = this.getShipmentState(i);
+    if (sState === 0) { // New Transporter can signup
+      content = (<div>FREE CONTRACT UP FOR GRABS</div>);
+    } else if (sState === 2) { // Show more info, the shipping is in progress
+      content = (<div>IN PROGRESS, SIGNABLE ONCE ARRIVED</div>);
     }
     return content;
-
   }
 
   getShipments() {
@@ -247,6 +229,7 @@ class Dashboard extends Component {
   //         })}
 
   render() {
+    var _this = this;
     return(
       <div>
         <br/><br/><br/><br/>
