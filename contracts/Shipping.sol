@@ -62,4 +62,35 @@ contract Shipping is Killable {
     shipments[shipmentNumber].shipped = true;
     shipments[shipmentNumber].enRoute = false;
   }
+
+  // Shipments that are available to be accepted by Shippers
+  function getOpenShipments() returns (Shipment[])  {
+    Shipment[] openShipments;
+    for (uint i = 0; i < shipments.length; ++i) {
+      if ((!shipments[i].enRoute) && (!shipments[i].shipped)) {
+        openShipments.push(shipments[i]);
+      }
+    }
+    return openShipments;
+  }
+
+  function getEnrouteShipments() {
+    Shipment[] enrouteShipments;
+    for (uint i = 0; i < shipments.length; ++i) {
+      if ((shipments[i].enRoute) && (!shipments[i].shipped)) {
+        enrouteShipments.push(shipments[i]);
+      }
+    }
+    return enrouteShipments;
+  }
+
+  function getFinishedShipments() {
+    Shipment[] finishedShipments;
+    for (uint i = 0; i < shipments.length; ++i) {
+      if ((!shipments[i].enRoute) && (shipments[i].shipped)) {
+        finishedShipments.push(shipments[i]);
+      }
+    }
+    return finishedShipments;
+  }
 }
