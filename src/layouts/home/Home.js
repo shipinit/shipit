@@ -8,7 +8,7 @@ class Home extends Component {
           <div className="pure-u-1-1">
             <h1>Welcome to ShipIt!</h1>
             <h3>The decentralized P2P shipping network.</h3>
-            <h2>Smart Contract Authentication</h2>
+            <h2>Why ship it with ShipIt?</h2>
             <p>This particular box comes with autentication via a smart contract built-in.</p>
             <p>In the upper-right corner, you'll see a login button. Click it to login with with the Authentication smart contract. If there is no user information for the given address, you'll be redirected to sign up. There are two authenticated routes: "/dashboard", which displays the user's name once authenticated; and "/profile", which allows a user to update their name.</p>
             <h3>Redirect Path</h3>
