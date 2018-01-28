@@ -76,7 +76,7 @@ contract Shipping is Killable {
     return openShipments;
   }
 
-  function getEnrouteShipments() {
+  function getEnrouteShipments() returns (Shipment[]) {
     Shipment[] enrouteShipments;
     for (uint i = 0; i < shipments.length; ++i) {
       if ((shipments[i].enRoute) && (!shipments[i].shipped)) {
@@ -86,7 +86,7 @@ contract Shipping is Killable {
     return enrouteShipments;
   }
 
-  function getFinishedShipments() {
+  function getFinishedShipments() returns (Shipment[]) {
     Shipment[] finishedShipments;
     for (uint i = 0; i < shipments.length; ++i) {
       if ((!shipments[i].enRoute) && (shipments[i].shipped)) {
