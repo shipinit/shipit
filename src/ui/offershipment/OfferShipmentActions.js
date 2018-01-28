@@ -30,7 +30,7 @@ export function offerShipment(shipping_number, license_plate) {
           shippingInstance = instance
 
           // Attempt to sign up user.
-          shippingInstance.offerShipment(shipping_number, license_plate, {value: parseInt(shipping_cost * Math.pow(10,18)),from: coinbase})
+          shippingInstance.offerShipment(shipping_number, license_plate, {from: coinbase})
           .then(function(result) {
             // If no error, login user.
             return browserHistory.push('/dashboard')

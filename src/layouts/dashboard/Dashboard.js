@@ -7,6 +7,9 @@ import { Button, Collapse, Card, CardBody, Container,
   Row, Col, InputGroup, InputGroupAddon, 
   InputGroupText, Input, Table } from 'reactstrap'
 
+  import OfferShipmentContainer from '../../ui/offershipment/OfferShipmentContainer.js'
+  import ReceiveShipmentContainer from '../../ui/receiveshipment/ReceiveShipmentContainer.js'
+
 const contract = require('truffle-contract')
 
 class Dashboard extends Component {
@@ -48,7 +51,7 @@ class Dashboard extends Component {
       },
       var: '',
       shipments: [
-        ["0x0", "", "0x000000000ss0000000000000000000000000000000", 123, "123dsa", "ad1", "ad2", true, true]],
+        ["0x0", "", "0x000000000ss0000000000000000000000000000000", 123, "123dsa", "ad1", "ad2", true, false]],
       transporterData: []
     };
 
@@ -121,9 +124,9 @@ class Dashboard extends Component {
     var content = (<div></div>);
     var sState = this.getShipmentState(i);
     if (sState === 0) { // New Transporter can signup
-      content = (<div>FREE CONTRACT UP FOR GRABS</div>);
+      content = (<div><OfferShipmentContainer shipping_number={i} /></div>);
     } else if (sState === 2) { // Show more info, the shipping is in progress
-      content = (<div>IN PROGRESS, SIGNABLE ONCE ARRIVED</div>);
+      content = (<div><ReceiveShipmentContainer shipping_number={i}/></div>);
     }
     return content;
   }
