@@ -1,10 +1,10 @@
-import ShippingContract from '../../../../build/contracts/Shipping.json'
+import ShippingContract from '../../../build/contracts/Shipping.json'
 // import { loginUser } from '../loginbutton/LoginButtonActions'
-import store from '../../../store'
+import store from '../../store'
 
 const contract = require('truffle-contract')
 
-export function getOpenShipments() {
+export function getShipments() {
   let web3 = store.getState().web3.web3Instance
 
   // Double-check web3's status.
@@ -29,9 +29,11 @@ export function getOpenShipments() {
           shippingInstance = instance
 
           // Attempt to sign up user.
-          shippingInstance.getShipment({from: coinbase})
+          shippingInstance.getShipmentCount({from: coinbase})
           .then(function(result) {
             // If no error, login user.
+            console.log('openshipmentactions')
+            console.log(result)
             return result;
             // return dispatch(loginUser())
           })

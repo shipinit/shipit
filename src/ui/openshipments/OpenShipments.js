@@ -1,11 +1,14 @@
 import React from 'react'
-import { getOpenShipments } from './OpenShipmentsActions'
+import { getShipments } from './OpenShipmentsActions'
 
-const OpenShipments = () => {
-  const shipments = getOpenShipments().map((shipment) => 
-    <li>Pickup Address {shipment.pickupAddress}</li>
-  )
-  return({shipments})
+const OpenShipments = ({ shipments }) => {
+  // const shipments = dispatch(getShipments());
+  // const shipments = getShipments().map((shipment) => 
+  //   <li>Pickup Address {shipment.pickupAddress}</li>
+  // )
+  // console.log(this.props);
+  debugger
+  return(<p>test</p>)
 }
 
 export default OpenShipments
