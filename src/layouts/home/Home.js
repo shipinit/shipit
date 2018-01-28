@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Jumbotron, Button } from 'reactstrap';
 
 class Home extends Component {
   render() {
@@ -6,8 +7,18 @@ class Home extends Component {
       <main className="container">
         <div className="pure-g">
           <div className="pure-u-1-1">
-            <h1>Welcome to ShipIt!</h1>
-            <h3>The decentralized P2P shipping network.</h3>
+            <br />
+            <Jumbotron>
+              <h1 className="display-3">Welcome to <b>ShipIt!</b></h1>
+              <p className="lead">The decentralized P2P shipping network of the future.</p>
+              <hr className="my-2" />
+              <p>Find out how you can help revolutionize parcel deliveries as a:</p>
+              <p className="lead">
+                <Button color="primary">Shipper</Button>{' '}
+                <Button color="secondary">Sender / Receiver</Button>
+              </p>
+            </Jumbotron>
+
             <h2>Why ship it with ShipIt?</h2>
             <p>This particular box comes with autentication via a smart contract built-in.</p>
             <p>In the upper-right corner, you'll see a login button. Click it to login with with the Authentication smart contract. If there is no user information for the given address, you'll be redirected to sign up. There are two authenticated routes: "/dashboard", which displays the user's name once authenticated; and "/profile", which allows a user to update their name.</p>
