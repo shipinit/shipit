@@ -33,13 +33,34 @@ contract Shipping is Killable {
     delete shipments[shipmentNumber];
   }
 
-  function getShipment(uint shipmentNumber) public view returns (address _sender, address _receiver, address _transporter) {
+  function getShipment(uint shipmentNumber) public view returns (
+    address _sender,
+    address _receiver,
+    address _transporter,
+    uint _shippingCost,
+    string _licensePlate,
+    string _pickupAddress,
+    string _deliveryAddress,
+    bool _enRoute,
+    bool _shipped
+  ) {
+    require(shipmentNumber < shipments.length);
     Shipment shipment = shipments[shipmentNumber];
-    return (shipment.sender, shipment.receiver, shipment.transporter);
+    return (
+      shipment.sender, 
+      shipment.receiver,
+      shipment.transporter,
+      shipment.shippingCost,
+      shipment.licensePlate,
+      shipment.pickupAddress,
+      shipment.deliveryAddress,
+      shipment.enRoute,
+      shipment.shipped
+    );
   }
 
   function getShipmentCount() public view returns (uint) {
-    return shipmentCount;
+    return shipments.length;
   }
 
   function offerShipment(uint shipmentNumber) {
