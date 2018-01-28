@@ -151,10 +151,10 @@ class Dashboard extends Component {
         <br/><br/><br/><br/>
         <Container>
         <Row style={{ paddingLeft: '20dp'}}>
-			<Col xs="1" className="text-center"><strong>Cost</strong></Col>
-			<Col xs="4" className="text-center"><strong>Pickup Address</strong></Col>
-			<Col xs="4" className="text-center"><strong>Delivery Address</strong></Col>
-		</Row><br/>
+    			<Col xs="1" className="text-center"><strong>Cost</strong></Col>
+    			<Col xs="4" className="text-center"><strong>Pickup Address</strong></Col>
+    			<Col xs="4" className="text-center"><strong>Delivery Address</strong></Col>
+    		</Row><br/>
         {this.state.stub.shippingList.map((el, i) => {
         	return (
         		<div key={i}>
@@ -186,48 +186,10 @@ class Dashboard extends Component {
         		</div>
         		)
         })}
+          <CreateShipmentContainer/>
+          {this.state.var}
         </Container>
       </div>
-      <main className="container">
-        <div className="pure-g">
-          <div className="pure-u-1-1">
-            <h1>Dashboard</h1>
-            <p><strong>Congratulations {this.props.authData.name}!</strong> If you're seeing this page, you've logged in with your own smart contract successfully.</p>
-
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <td>2</td>
-                  <td>Jacob</td>
-                  <td>Thornton</td>
-                  <td>@fat</td>
-                </tr>
-                <tr>
-                  <td>3</td>
-                  <td colSpan="2">Larry the Bird</td>
-                  <td>@twitter</td>
-                </tr>
-              </tbody>
-            </Table>
-            <CreateShipmentContainer/>
-            {this.state.var}
-          </div>
-        </div>
-      </main>
     )
   }
 }
